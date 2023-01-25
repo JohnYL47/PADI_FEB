@@ -32,14 +32,16 @@ public class ControlladorCliente implements ActionListener {
     private int TxtTelefono;
     private String TxtDireccion;
 
-    /*public ControlladorCliente (Sistema vm, int TxtID, String TxtNombre, int TxtTelefono, String TxtDireccion, String TxtRazon) {
-        this.vm = vm;
-        this.TxtID = TxtID;
-        this.TxtNombre = TxtNombre;
-        this.TxtTelefono = TxtTelefono;
-        this.TxtDireccion = TxtDireccion;
-        this.TxtRazon = TxtRazon;
-    }*/
+    /***
+    * public ControlladorCliente (Sistema vm, int TxtID, String TxtNombre, int TxtTelefono, String TxtDireccion, String TxtRazon) {
+    *    this.vm = vm;
+    *    this.TxtID = TxtID;
+    *    this.TxtNombre = TxtNombre;
+    *    this.TxtTelefono = TxtTelefono;
+    *    this.TxtDireccion = TxtDireccion;
+    *    this.TxtRazon = TxtRazon;
+    *}
+    */
     ControlladorCliente(Clientes Cl, CrudCliente CCl, Modelos_Clientes McL, Sistema vm) {
         this.Cl = Cl;
         this.CCl = CCl;
@@ -83,8 +85,7 @@ public class ControlladorCliente implements ActionListener {
             }
         }
 
-        if (e.getSource() == this.Cl.BtnActualizar) { //Se requieren todos los datos
-
+        if (e.getSource() == this.Cl.BtnActualizar) {
             if ("".equals(this.Cl.TxtID.getText())) {
                 JOptionPane.showMessageDialog(null, "seleccione una fila");
             } else {
@@ -129,7 +130,6 @@ public class ControlladorCliente implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Registro Eliminado");
                 limpiar();
             }
-
         }
 
         if (e.getSource() == this.Cl.BtnMostrar) {
@@ -140,15 +140,7 @@ public class ControlladorCliente implements ActionListener {
         if (e.getSource() == this.Cl.BtnVolverC) {
             vm.setVisible(true);
             Cl.dispose();
-        }/*
-        if (e.getSource() == this.Cl.BtnLimpiar) {
-            TxtID = Integer.parseInt(this.Cl.TxtID.getText());
-            TxtNombre = this.Cl.TxtNombre.getText();
-            TxtTelefono = Integer.parseInt(this.Cl.TxtTelefono.getText());
-            TxtDireccion = this.Cl.TxtDireccion.getText();
-            TxtRazon = this.Cl.TxtRazon.getText();
-            limpiar();
-        }*/
+        }
     }
 
     public void limpiar() {
