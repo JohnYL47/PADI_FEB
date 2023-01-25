@@ -85,25 +85,31 @@ public class ControlladorCliente implements ActionListener {
 
         if (e.getSource() == this.Cl.BtnActualizar) { //Se requieren todos los datos
 
-            if (this.Cl.TxtDireccion.getText().equals("") || this.Cl.TxtID.getText().equals("") || this.Cl.TxtNombre.getText().equals("") || this.Cl.TxtTelefono.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Todos los campos son requeridos");
+            if ("".equals(this.Cl.TxtID.getText())) {
+                JOptionPane.showMessageDialog(null, "seleccione una fila");
             } else {
-                TxtID = Integer.parseInt(this.Cl.TxtID.getText());
-                TxtNombre = this.Cl.TxtNombre.getText();
-                TxtTelefono = Integer.parseInt(this.Cl.TxtTelefono.getText());
-                TxtDireccion = this.Cl.TxtDireccion.getText();
 
-                McL.setTxtID(TxtID);
-                McL.setTxtNombre(TxtNombre);
-                McL.setTxtTelefono(TxtTelefono);
-                McL.setTxtDireccion(TxtDireccion);
+                if (!"".equals(this.Cl.TxtNombre.getText()) || !"".equals(this.Cl.TxtTelefono.getText())) {
+                    
+                    TxtID = Integer.parseInt(this.Cl.TxtID.getText());
+                    TxtNombre = this.Cl.TxtNombre.getText();
+                    TxtTelefono = Integer.parseInt(this.Cl.TxtTelefono.getText());
+                    TxtDireccion = this.Cl.TxtDireccion.getText();                    
+                    
+                    McL.setTxtNombre(TxtNombre);
+                    McL.setTxtTelefono(TxtTelefono);
+                    McL.setTxtDireccion(TxtDireccion);
+                    McL.setTxtID(TxtID);
 
-                CCl.actualizar(McL);
-                
-                LimpiarTable();
-                listarCliente();
-                JOptionPane.showMessageDialog(null, "Registro Actualizado");
-                limpiar();
+                    CCl.actualizar(McL);
+
+                    JOptionPane.showMessageDialog(null, "Cliente Modificado");
+                    limpiar();
+                    LimpiarTable();
+                    listarCliente();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Los campos estan vacios");
+                }
             }
         }
 
@@ -115,7 +121,7 @@ public class ControlladorCliente implements ActionListener {
                 TxtNombre = this.Cl.TxtNombre.getText();
                 TxtTelefono = Integer.parseInt(this.Cl.TxtTelefono.getText());
                 TxtDireccion = this.Cl.TxtDireccion.getText();
-                
+
                 McL.setTxtID(TxtID);
                 CCl.eliminar(McL);
                 LimpiarTable();
@@ -144,7 +150,7 @@ public class ControlladorCliente implements ActionListener {
             limpiar();
         }*/
     }
-    
+
     public void limpiar() {
         this.Cl.TxtID.setText("");
         this.Cl.TxtNombre.setText("");
@@ -165,6 +171,7 @@ public class ControlladorCliente implements ActionListener {
         }
         this.Cl.jTableclient.setModel(modelo);
     }
+
     public void LimpiarTable() {
         for (int i = 0; i < modelo.getRowCount(); i++) {
             modelo.removeRow(i);

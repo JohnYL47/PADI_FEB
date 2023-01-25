@@ -55,10 +55,10 @@ public class CrudCliente {
                 + "where ID=?";
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, M_Cli.getTxtID());
-            ps.setString(2, M_Cli.getTxtNombre());
-            ps.setInt(3, M_Cli.getTxtTelefono());
-            ps.setString(4, M_Cli.getTxtDireccion());
+            ps.setString(1, M_Cli.getTxtNombre());
+            ps.setInt(2, M_Cli.getTxtTelefono());
+            ps.setString(3, M_Cli.getTxtDireccion());
+            ps.setInt(4, M_Cli.getTxtID());
             ps.execute();
             return true;
         } catch (SQLException e) {
