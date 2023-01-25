@@ -115,20 +115,17 @@ public class ControlladorCliente implements ActionListener {
         }
 
         if (e.getSource() == this.Cl.BtnBorrar) {
-            if (this.Cl.TxtID.getText().equals("") || this.Cl.TxtNombre.getText().equals("") || this.Cl.TxtTelefono.getText().equals("") || this.Cl.TxtDireccion.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Todos los campos son requeridos");
+            if (!"".equals(this.Cl.TxtID.getText())) {
+                int pregunta = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminarlo?");
+                if (pregunta == 0) {
+                    int id = Integer.parseInt(this.Cl.TxtID.getText());
+                    CCl.eliminar(id);
+                    LimpiarTable();
+                    listarCliente();
+                    limpiar();
+                }
             } else {
-                TxtID = Integer.parseInt(this.Cl.TxtID.getText());
-                TxtNombre = this.Cl.TxtNombre.getText();
-                TxtTelefono = Integer.parseInt(this.Cl.TxtTelefono.getText());
-                TxtDireccion = this.Cl.TxtDireccion.getText();
-
-                McL.setTxtID(TxtID);
-                CCl.eliminar(McL);
-                LimpiarTable();
-                listarCliente();
-                JOptionPane.showMessageDialog(null, "Registro Eliminado");
-                limpiar();
+                JOptionPane.showMessageDialog(null, "Ingrese los datos");
             }
         }
 

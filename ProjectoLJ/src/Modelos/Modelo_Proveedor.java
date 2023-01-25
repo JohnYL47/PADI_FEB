@@ -14,14 +14,12 @@ public class Modelo_Proveedor {
     public String TxtNombrePr;
     public int TxtTelefonoPr;
     public String TxtDireccionPr;
-    public String TxtRazonPr;
 
-    public Modelo_Proveedor(int TxtRUT, String TxtNombrePr, int TxtTelefonoPr, String TxtDireccionPr, String TxtRazonPr) {
+    public Modelo_Proveedor(int TxtRUT, String TxtNombrePr, int TxtTelefonoPr, String TxtDireccionPr) {
         this.TxtRUT = TxtRUT;
         this.TxtNombrePr = TxtNombrePr;
         this.TxtTelefonoPr = TxtTelefonoPr;
         this.TxtDireccionPr = TxtDireccionPr;
-        this.TxtRazonPr = TxtRazonPr;
     }
     public Modelo_Proveedor(){} 
 
@@ -55,13 +53,5 @@ public class Modelo_Proveedor {
 
     public void setTxtDireccionPr(String TxtDireccionPr) {
         this.TxtDireccionPr = TxtDireccionPr;
-    }
-
-    public String getTxtRazonPr() {
-        return TxtRazonPr;
-    }
-
-    public void setTxtRazonPr(String TxtRazonPr) {
-        this.TxtRazonPr = TxtRazonPr;
     }
 }

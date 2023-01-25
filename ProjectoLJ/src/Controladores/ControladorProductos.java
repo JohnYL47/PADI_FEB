@@ -28,6 +28,13 @@ public class ControladorProductos implements ActionListener{
     private int TxtCantidad;
     private Double TxtPrecio;
     private String TxtProveedor;
+    
+    private int Pl_Codigo;
+    private int Pl_Cantidad;
+    private int Pl_Precio;
+    private String Pl_Descripcion;
+    private String Pl_Proveedor;
+    
 
     public ControladorProductos(Productos V_Pro, CrudProductos C_Pro, Modelo_Productos M_Pro, Sistema Si) {
         this.V_Pro = V_Pro;
@@ -60,12 +67,33 @@ public class ControladorProductos implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        /***
+         * if (!"".equals(txtRucProveedor.getText()) || !"".equals(txtNombreproveedor.getText()) || !"".equals(txtTelefonoProveedor.getText()) || !"".equals(txtDireccionProveedor.getText())) {
+            pr.setRuc(txtRucProveedor.getText());
+            pr.setNombre(txtNombreproveedor.getText());
+            pr.setTelefono(txtTelefonoProveedor.getText());
+            pr.setDireccion(txtDireccionProveedor.getText());
+            PrDao.RegistrarProveedor(pr);
+            JOptionPane.showMessageDialog(null, "Proveedor Registrado");
+            LimpiarTable();
+            ListarProveedor();
+            LimpiarProveedor();
+            btnEditarProveedor.setEnabled(false);
+            btnEliminarProveedor.setEnabled(false);
+            btnguardarProveedor.setEnabled(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Los campos esta vacios");
+        }
+         */
+        
         if (e.getSource() == this.V_Pro.BtnGuardar) {
-            int Pl_Codigo = Integer.parseInt(this.V_Pro.TxtCodigoP.getText());
-            String Pl_Descripcion = this.V_Pro.TxtDescripcionP.getText();
-            int Pl_Cantidad = Integer.parseInt(this.V_Pro.TxtCantidadP.getText());
-            int Pl_Precio = Integer.parseInt(this.V_Pro.TxtPrecioP.getText());
-            String Pl_Proveedor = this.V_Pro.TxtProveedorP.getText();
+            
+            Pl_Codigo = Integer.parseInt(this.V_Pro.TxtCodigoP.getText());
+            Pl_Descripcion = this.V_Pro.TxtDescripcionP.getText();
+            Pl_Cantidad = Integer.parseInt(this.V_Pro.TxtCantidadP.getText());
+            Pl_Precio = Integer.parseInt(this.V_Pro.TxtPrecioP.getText());
+            Pl_Proveedor = this.V_Pro.TxtProveedorP.getText();
 
             M_Pro.setTxtCodigoP(Pl_Codigo);
             M_Pro.setTxtDescripcionP(Pl_Descripcion);
@@ -79,11 +107,12 @@ public class ControladorProductos implements ActionListener{
         }
 
         if (e.getSource() == this.V_Pro.BtnActualizar) {
-            int Pl_Codigo = Integer.parseInt(this.V_Pro.TxtCodigoP.getText());
-            String Pl_Descripcion = this.V_Pro.TxtDescripcionP.getText();
-            int Pl_Cantidad = Integer.parseInt(this.V_Pro.TxtCantidadP.getText());
-            int Pl_Precio = Integer.parseInt(this.V_Pro.TxtPrecioP.getText());
-            String Pl_Proveedor = this.V_Pro.TxtProveedorP.getText();
+            
+            Pl_Codigo = Integer.parseInt(this.V_Pro.TxtCodigoP.getText());
+            Pl_Descripcion = this.V_Pro.TxtDescripcionP.getText();
+            Pl_Cantidad = Integer.parseInt(this.V_Pro.TxtCantidadP.getText());
+            Pl_Precio = Integer.parseInt(this.V_Pro.TxtPrecioP.getText());
+            Pl_Proveedor = this.V_Pro.TxtProveedorP.getText();
 
             M_Pro.setTxtCodigoP(Pl_Codigo);
             M_Pro.setTxtDescripcionP(Pl_Descripcion);
@@ -97,11 +126,11 @@ public class ControladorProductos implements ActionListener{
         }
 
         if (e.getSource() == this.V_Pro.BtnBorrar) {
-            int Pl_Codigo = Integer.parseInt(this.V_Pro.TxtCodigoP.getText());
-            String Pl_Descripcion = this.V_Pro.TxtDescripcionP.getText();
-            int Pl_Cantidad = Integer.parseInt(this.V_Pro.TxtCantidadP.getText());
-            int Pl_Precio = Integer.parseInt(this.V_Pro.TxtPrecioP.getText());
-            String Pl_Proveedor = this.V_Pro.TxtProveedorP.getText();
+            Pl_Codigo = Integer.parseInt(this.V_Pro.TxtCodigoP.getText());
+            Pl_Descripcion = this.V_Pro.TxtDescripcionP.getText();
+            Pl_Cantidad = Integer.parseInt(this.V_Pro.TxtCantidadP.getText());
+            Pl_Precio = Integer.parseInt(this.V_Pro.TxtPrecioP.getText());
+            Pl_Proveedor = this.V_Pro.TxtProveedorP.getText();
 
             M_Pro.setTxtCodigoP(Pl_Codigo);
             C_Pro.eliminar(M_Pro);
@@ -111,11 +140,11 @@ public class ControladorProductos implements ActionListener{
 
         if (e.getSource() == this.V_Pro.BtnMostrar) {
             
-            int Pl_Codigo = Integer.parseInt(this.V_Pro.TxtCodigoP.getText());
-            String Pl_Descripcion = this.V_Pro.TxtDescripcionP.getText();
-            int Pl_Cantidad = Integer.parseInt(this.V_Pro.TxtCantidadP.getText());
-            int Pl_Precio = Integer.parseInt(this.V_Pro.TxtPrecioP.getText());
-            String Pl_Proveedor = this.V_Pro.TxtProveedorP.getText();
+            Pl_Codigo = Integer.parseInt(this.V_Pro.TxtCodigoP.getText());
+            Pl_Descripcion = this.V_Pro.TxtDescripcionP.getText();
+            Pl_Cantidad = Integer.parseInt(this.V_Pro.TxtCantidadP.getText());
+            Pl_Precio = Integer.parseInt(this.V_Pro.TxtPrecioP.getText());
+            Pl_Proveedor = this.V_Pro.TxtProveedorP.getText();
             
             M_Pro.setTxtCodigoP(Pl_Codigo);
             //C_Pro.buscar(M_Pro);

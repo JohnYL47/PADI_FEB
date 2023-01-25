@@ -10,13 +10,15 @@ import Vista.Proveedor;
 import Vista.Sistema;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Familia Marbello
  */
-public class ControladorProveedor implements ActionListener{
+public class ControladorProveedor implements ActionListener {
 
     private Proveedor V_Prov;
     private CrudProveedor C_Prov;
@@ -27,7 +29,13 @@ public class ControladorProveedor implements ActionListener{
     private String TxtNombrePr;
     private int TxtTelefonoPr;
     private String TxtDireccionPr;
-    private String TxtRazonPr;
+
+    private int Cl_RUT;
+    private String Cl_Nombre;
+    private int Cl_Telefono;
+    private String Cl_Direccion;
+
+    private DefaultTableModel modelo = new DefaultTableModel();
 
     public ControladorProveedor(Proveedor V_Prov, CrudProveedor C_Prov, Modelo_Proveedor M_Prov, Sistema Si) {
         this.V_Prov = V_Prov;
@@ -35,11 +43,11 @@ public class ControladorProveedor implements ActionListener{
         this.M_Prov = M_Prov;
         this.Si = Si;
 
-        this.V_Prov.BtnGuardar.addActionListener( this);
-        this.V_Prov.BtnActualizar.addActionListener( this);
+        this.V_Prov.BtnGuardar.addActionListener(this);
+        this.V_Prov.BtnActualizar.addActionListener(this);
         this.V_Prov.BtnBorrar.addActionListener(this);
-        this.V_Prov.BtnMostrar.addActionListener( this);
-        this.V_Prov.BtnVolverPr.addActionListener( this);
+        this.V_Prov.BtnMostrar.addActionListener(this);
+        this.V_Prov.BtnVolverPr.addActionListener(this);
     }
 
     public void iniciar() {
@@ -53,85 +61,117 @@ public class ControladorProveedor implements ActionListener{
         this.V_Prov.TxtNombrePr.setText(null);
         this.V_Prov.TxtTelefonoPr.setText(null);
         this.V_Prov.TxtDireccionPr.setText(null);
-        this.V_Prov.TxtRazonPr.setText(null);
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        /**
+         * *
+         * if (!"".equals(txtRucProveedor.getText()) ||
+         * !"".equals(txtNombreproveedor.getText()) ||
+         * !"".equals(txtTelefonoProveedor.getText()) ||
+         * !"".equals(txtDireccionProveedor.getText())) {
+         * pr.setRuc(txtRucProveedor.getText());
+         * pr.setNombre(txtNombreproveedor.getText());
+         * pr.setTelefono(txtTelefonoProveedor.getText());
+         * pr.setDireccion(txtDireccionProveedor.getText());
+         * PrDao.RegistrarProveedor(pr); JOptionPane.showMessageDialog(null,
+         * "Proveedor Registrado"); LimpiarTable(); ListarProveedor();
+         * LimpiarProveedor(); btnEditarProveedor.setEnabled(false);
+         * btnEliminarProveedor.setEnabled(false);
+         * btnguardarProveedor.setEnabled(true); } else {
+         * JOptionPane.showMessageDialog(null, "Los campos esta vacios"); }
+         */
         if (e.getSource() == this.V_Prov.BtnGuardar) {
 
-            int Cl_RUT = Integer.parseInt(this.V_Prov.TxtRUT.getText());
-            String Cl_Nombre = this.V_Prov.TxtNombrePr.getText();
-            int Cl_Telefono = Integer.parseInt(this.V_Prov.TxtTelefonoPr.getText());
-            String Cl_Direccion = this.V_Prov.TxtDireccionPr.getText();
-            String Cl_Razon = this.V_Prov.TxtRazonPr.getText();
+            if (!"".equals(this.V_Prov.TxtRUT.getText()) || !"".equals(this.V_Prov.TxtNombrePr.getText()) || !"".equals(this.V_Prov.TxtTelefonoPr.getText()) || !"".equals(this.V_Prov.TxtDireccionPr.getText())) {
 
-            M_Prov.setTxtRUT(Cl_RUT);
-            M_Prov.setTxtNombrePr(Cl_Nombre);
-            M_Prov.setTxtTelefonoPr(Cl_Telefono);
-            M_Prov.setTxtDireccionPr(Cl_Direccion);
-            M_Prov.setTxtRazonPr(Cl_Razon);
+                Cl_RUT = Integer.parseInt(this.V_Prov.TxtRUT.getText());
+                Cl_Nombre = this.V_Prov.TxtNombrePr.getText();
+                Cl_Telefono = Integer.parseInt(this.V_Prov.TxtTelefonoPr.getText());
+                Cl_Direccion = this.V_Prov.TxtDireccionPr.getText();
 
-            C_Prov.registrar(M_Prov);
-            JOptionPane.showMessageDialog(null, "Guardado");
-            limpiar();
+                M_Prov.setTxtRUT(Cl_RUT);
+                M_Prov.setTxtNombrePr(Cl_Nombre);
+                M_Prov.setTxtTelefonoPr(Cl_Telefono);
+                M_Prov.setTxtDireccionPr(Cl_Direccion);
+
+                C_Prov.registrar(M_Prov);
+                JOptionPane.showMessageDialog(null, "Guardado");
+                LimpiarTable();
+                ListarProveedor();
+                limpiar();
+            } else {
+                JOptionPane.showMessageDialog(null, "Los campos estan vacios");
+            }
         }
 
         if (e.getSource() == this.V_Prov.BtnActualizar) {
 
-            int Cl_RUT = Integer.parseInt(this.V_Prov.TxtRUT.getText());
-            String Cl_Nombre = this.V_Prov.TxtNombrePr.getText();
-            int Cl_Telefono = Integer.parseInt(this.V_Prov.TxtTelefonoPr.getText());
-            String Cl_Direccion = this.V_Prov.TxtDireccionPr.getText();
-            String Cl_Razon = this.V_Prov.TxtRazonPr.getText();
+            Cl_RUT = Integer.parseInt(this.V_Prov.TxtRUT.getText());
+            Cl_Nombre = this.V_Prov.TxtNombrePr.getText();
+            Cl_Telefono = Integer.parseInt(this.V_Prov.TxtTelefonoPr.getText());
+            Cl_Direccion = this.V_Prov.TxtDireccionPr.getText();
 
             M_Prov.setTxtRUT(Cl_RUT);
             M_Prov.setTxtNombrePr(Cl_Nombre);
             M_Prov.setTxtTelefonoPr(Cl_Telefono);
             M_Prov.setTxtDireccionPr(Cl_Direccion);
-            M_Prov.setTxtRazonPr(Cl_Razon);
 
-            C_Prov.registrar(M_Prov);
+            C_Prov.Actualizar(M_Prov);
             JOptionPane.showMessageDialog(null, "Registro Actualizado");
+            LimpiarTable();
+            ListarProveedor();
             limpiar();
         }
 
         if (e.getSource() == this.V_Prov.BtnBorrar) {
 
-            int Cl_RUT = Integer.parseInt(this.V_Prov.TxtRUT.getText());
-            String Cl_Nombre = this.V_Prov.TxtNombrePr.getText();
-            int Cl_Telefono = Integer.parseInt(this.V_Prov.TxtTelefonoPr.getText());
-            String Cl_Direccion = this.V_Prov.TxtDireccionPr.getText();
-            String Cl_Razon = this.V_Prov.TxtRazonPr.getText();
-
-            C_Prov.eliminar(M_Prov);
-            JOptionPane.showMessageDialog(null, "Registro Eliminado");
-            limpiar();
+            if (!"".equals(this.V_Prov.TxtRUT.getText())) {
+                int pregunta = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminarlo?");
+                if (pregunta == 0) {
+                    int id = Integer.parseInt(this.V_Prov.TxtRUT.getText());
+                    C_Prov.EliminarProveedor(id);
+                    LimpiarTable();
+                    ListarProveedor();
+                    limpiar();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione una fila");
+            }
         }
 
         if (e.getSource() == this.V_Prov.BtnMostrar) {
-
-            int Cl_RUT = Integer.parseInt(this.V_Prov.TxtRUT.getText());
-            String Cl_Nombre = this.V_Prov.TxtNombrePr.getText();
-            int Cl_Telefono = Integer.parseInt(this.V_Prov.TxtTelefonoPr.getText());
-            String Cl_Direccion = this.V_Prov.TxtDireccionPr.getText();
-            String Cl_Razon = this.V_Prov.TxtRazonPr.getText();
-
-            M_Prov.setTxtRUT(Cl_RUT);
-            if (C_Prov.buscar(M_Prov)) {
-                this.V_Prov.TxtRUT.setText(String.valueOf(M_Prov.getTxtRUT()));
-                this.V_Prov.TxtNombrePr.setText(String.valueOf(M_Prov.getTxtNombrePr()));
-                this.V_Prov.TxtTelefonoPr.setText(String.valueOf(M_Prov.getTxtTelefonoPr()));
-                this.V_Prov.TxtDireccionPr.setText(String.valueOf(M_Prov.getTxtDireccionPr()));
-                this.V_Prov.TxtRazonPr.setText(String.valueOf(M_Prov.getTxtRazonPr()));
-            }
+            LimpiarTable();
+            ListarProveedor();
         }
         if (e.getSource() == this.V_Prov.BtnVolverPr) {
             Si.setVisible(true);
             V_Prov.dispose();
-        }
-        if (e.getSource() == this.V_Prov.BtnLimpiarPr) {
             limpiar();
         }
+    }
+
+    public void LimpiarTable() {
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i = i - 1;
+        }
+    }
+
+    public void ListarProveedor() {
+        List<Modelo_Proveedor> ListarPr = C_Prov.ListarProveedor();
+        modelo = (DefaultTableModel) this.V_Prov.jTableProveedor.getModel();
+        Object[] ob = new Object[5];
+        for (int i = 0; i < ListarPr.size(); i++) {
+            ob[0] = ListarPr.get(i).getTxtRUT();
+            ob[1] = ListarPr.get(i).getTxtNombrePr();
+            ob[2] = ListarPr.get(i).getTxtTelefonoPr();
+            ob[3] = ListarPr.get(i).getTxtDireccionPr();
+            modelo.addRow(ob);
+        }
+        this.V_Prov.jTableProveedor.setModel(modelo);
+
     }
 }

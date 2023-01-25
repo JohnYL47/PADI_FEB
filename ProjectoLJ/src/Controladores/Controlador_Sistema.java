@@ -74,10 +74,9 @@ public class Controlador_Sistema implements ActionListener {
             St.dispose();
         }
         if (e.getSource() == this.St.BtnCliente) {
-            //Cliente -- Relativamente hecho
+            // Terminado.
             ControlladorCliente cc = new ControlladorCliente(Cl, CCl, McL, St);
             cc.iniciar();
-            //this.Cl.setVisible(true);
             St.dispose();
         }
         if (e.getSource() == this.St.BtnProducto) {

@@ -75,24 +75,23 @@ public class CrudCliente {
         }
     }
 
-    public boolean eliminar(Modelos_Clientes M_Cli) {
-
-        PreparedStatement ps = null;
+    public boolean eliminar(int id){
         Connection con = coon.getConexion();
-        String sql = "delete from clientes where ID=?";
+        PreparedStatement ps = null;
+        String sql = "DELETE FROM clientes WHERE ID = ? ";
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, M_Cli.getTxtID());
+            ps.setInt(1, id);
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.err.println(e);
+            System.out.println(e.toString());
             return false;
-        } finally {
+        }finally{
             try {
                 con.close();
             } catch (SQLException e) {
-                System.err.println(e);
+                System.out.println(e.toString());
             }
         }
     }

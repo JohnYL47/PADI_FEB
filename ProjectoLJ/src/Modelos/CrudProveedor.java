@@ -9,26 +9,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Conexiones.Conexion;
+import Vista.Proveedor;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Familia Marbello
  */
 public class CrudProveedor {
+
     PreparedStatement ps = null;
-         Conexion cn = new Conexion();
-public boolean registrar(Modelo_Proveedor M_Prov) {
-         
-         Connection con = cn.getConexion();
-         String sql = "Insert into proveedores"
-                + "(ID, Nombre, Telefono, Direccion, `Razon social`)Values(?,?,?,?,?)";
+    Conexion cn = new Conexion();
+
+    public boolean registrar(Modelo_Proveedor M_Prov) {
+
+        Connection con = cn.getConexion();
+        String sql = "Insert into proveedores"
+                + "(ID, Nombre, Telefono, Direccion)Values(?,?,?,?)";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, M_Prov.getTxtRUT());
             ps.setString(2, M_Prov.getTxtNombrePr());
             ps.setInt(3, M_Prov.getTxtTelefonoPr());
             ps.setString(4, M_Prov.getTxtDireccionPr());
-            ps.setString(5, M_Prov.getTxtRazonPr());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -43,58 +47,51 @@ public boolean registrar(Modelo_Proveedor M_Prov) {
         }
     }
 
-    public boolean actualizar(Modelo_Proveedor M_Prov) {
-           PreparedStatement ps = null;
+    public boolean Actualizar(Modelo_Proveedor pr){
         Connection con = cn.getConexion();
-
-        String sql = "update proveedores set Nombre =?, Telefono=?, Direccion=?, `Razon social`=? "
-                + "where RUT=?";
-        try {
+        String sql = "UPDATE proveedores SET nombre=?, telefono=?, direccion=? WHERE id=?";
+        try {            
             ps = con.prepareStatement(sql);
-             ps.setInt(1, M_Prov.getTxtRUT());
-            ps.setString(2, M_Prov.getTxtNombrePr());
-            ps.setInt(3, M_Prov.getTxtTelefonoPr());
-            ps.setString(4, M_Prov.getTxtDireccionPr());
-            ps.setString(5, M_Prov.getTxtRazonPr());
+            ps.setString(1, pr.getTxtNombrePr());
+            ps.setInt(2, pr.getTxtTelefonoPr());
+            ps.setString(3, pr.getTxtDireccionPr());
+            ps.setInt(4, pr.getTxtRUT());
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.err.println(e);
+            System.out.println(e.toString());
             return false;
-        } finally {
+        }finally{
             try {
                 con.close();
             } catch (SQLException e) {
-                System.err.println(e);
-
+                System.out.println(e.toString());
             }
-
         }
     }
 
-    public boolean eliminar(Modelo_Proveedor M_Prov) {
-          PreparedStatement ps = null;
+    public boolean EliminarProveedor(int id){
         Connection con = cn.getConexion();
-        String sql = "delete from proveedores where ID =?";
+        String sql = "DELETE FROM proveedores WHERE id = ? ";
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, M_Prov.getTxtRUT());
+            ps.setInt(1, id);
             ps.execute();
             return true;
         } catch (SQLException e) {
-            System.err.println(e);
+            System.out.println(e.toString());
             return false;
-        } finally {
+        }finally{
             try {
                 con.close();
             } catch (SQLException e) {
-                System.err.println(e);
+                System.out.println(e.toString());
             }
         }
     }
 
     public boolean buscar(Modelo_Proveedor M_Prov) {
-          PreparedStatement ps = null;
+        PreparedStatement ps = null;
         Connection con = cn.getConexion();
         ResultSet rs = null;
         String sql = "select * from proveedores where ID=?";
@@ -108,7 +105,6 @@ public boolean registrar(Modelo_Proveedor M_Prov) {
                 M_Prov.setTxtNombrePr(rs.getString("Nombre"));
                 M_Prov.setTxtTelefonoPr(Integer.parseInt(rs.getString("Telefono")));
                 M_Prov.setTxtDireccionPr(rs.getString("Direccion"));
-                M_Prov.setTxtRazonPr(rs.getString("`Razon social`"));
                 return true;
             }
             return false;
@@ -124,6 +120,28 @@ public boolean registrar(Modelo_Proveedor M_Prov) {
             }
 
         }
-    }    
-}    
+    }
 
+    public List ListarProveedor(){
+        List<Modelo_Proveedor> Listapr = new ArrayList();
+        ResultSet rs = null;
+        String sql = "SELECT * FROM proveedores";
+        try {
+            Connection con = cn.getConexion();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                Modelo_Proveedor pr = new Modelo_Proveedor();
+                pr.setTxtRUT(rs.getInt("id"));
+                pr.setTxtNombrePr(rs.getString("nombre"));
+                pr.setTxtTelefonoPr(Integer.parseInt( rs.getString("telefono") ));
+                pr.setTxtDireccionPr(rs.getString("direccion"));
+                Listapr.add(pr);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return Listapr;
+    }
+}
