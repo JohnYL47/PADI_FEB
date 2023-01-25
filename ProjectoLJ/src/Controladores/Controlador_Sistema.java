@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -6,6 +6,7 @@ package Controladores;
 
 import Modelos.*;
 import Vista.*;
+import Controladores.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,8 +20,9 @@ public class Controlador_Sistema implements ActionListener {
     private CrudCliente CCl = new CrudCliente();
     private CrudProductos CPd = new CrudProductos();
     private CrudProveedor CPv = new CrudProveedor();
+    private CrudVenta CV = new CrudVenta();
     //Modelos
-    private Modelo_NuevaVenta MnV = new Modelo_NuevaVenta();
+    private Modelo_Venta MV = new Modelo_Venta();
     private Modelo_Productos MpD = new Modelo_Productos();
     private Modelo_Proveedor MpV = new Modelo_Proveedor();
     private Modelos_Clientes McL = new Modelos_Clientes() ;
@@ -30,7 +32,7 @@ public class Controlador_Sistema implements ActionListener {
     private Productos Pd = new Productos();
     private Proveedor Pv = new Proveedor();
     private Ventas Vn = new Ventas();
-    private Sistema Si = new Sistema();
+    private Sistema St = new Sistema();
 
     
 
@@ -44,19 +46,19 @@ public class Controlador_Sistema implements ActionListener {
         this.MpV = MpV;
     }*/
 
-    Controlador_Sistema(Sistema st) {
-        this.Si = st;
-        this.Si.BtnCliente.addActionListener(this);
-        this.Si.BtnNuevaVenta.addActionListener(this);
-        this.Si.BtnProducto.addActionListener(this);
-        this.Si.BtnProveedor.addActionListener(this);
-        this.Si.BtnVenta.addActionListener(this);
+    Controlador_Sistema(Sistema St) {
+        this.St = St;
+        this.St.BtnCliente.addActionListener(this);
+        this.St.BtnNuevaVenta.addActionListener(this);
+        this.St.BtnProducto.addActionListener(this);
+        this.St.BtnProveedor.addActionListener(this);
+        this.St.BtnVenta.addActionListener(this);
     }
 
     void iniciar() {
-        this.Si.setTitle("Principal");
-        this.Si.setVisible(true);
-        this.Si.setLocationRelativeTo(null);
+        this.St.setTitle("Principal");
+        this.St.setVisible(true);
+        this.St.setLocationRelativeTo(null);
     }
 
     @Override
@@ -65,38 +67,38 @@ public class Controlador_Sistema implements ActionListener {
 
         /* Navegar a otros Jframe en el Panel de Inicio */
         
-        if (e.getSource() ==  this.Si.BtnNuevaVenta) {
-            //Nueva Venta - Se necesita Controlador, Crud y Modelo
-            //Controlador_newVenta CnV = new #(nv);
-            //CnV.Iniciar();
-            this.Nv.setVisible(true);
-            Si.dispose();
-            //No disponible
+        if (e.getSource() ==  this.St.BtnNuevaVenta) {
+            //New Venta -- Incompleto
+            Controlador_VentaNew CVnew = new Controlador_VentaNew(Nv, CV, MV, St);
+            CVnew.Iniciar();
+            St.dispose();
         }
-        if (e.getSource() == this.Si.BtnCliente) {
-            //Cliente - Relativamente hecho
-            ControlladorCliente cc = new ControlladorCliente(Cl, CCl, McL, Si);
+        if (e.getSource() == this.St.BtnCliente) {
+            //Cliente -- Relativamente hecho
+            ControlladorCliente cc = new ControlladorCliente(Cl, CCl, McL, St);
             cc.iniciar();
             //this.Cl.setVisible(true);
-            Si.dispose();
+            St.dispose();
         }
-        if (e.getSource() == this.Si.BtnProducto) {
-            //Producto
-            ControladorProductos cpd = new ControladorProductos(Pd, CPd, MpD, Si);
+        if (e.getSource() == this.St.BtnProducto) {
+            //Producto -- "Incompleto"
+            ControladorProductos cpd = new ControladorProductos(Pd, CPd, MpD, St);
             cpd.iniciar();
-            Si.dispose();
+            St.dispose();
         }
-        if (e.getSource() == this.Si.BtnProveedor) {
-            //Proveedor
-            ControladorProveedor cpv = new ControladorProveedor(Pv, CPv, MpV, Si);
+        if (e.getSource() == this.St.BtnProveedor) {
+            //Proveedor -- No revisado
+            ControladorProveedor cpv = new ControladorProveedor(Pv, CPv, MpV, St);
             cpv.iniciar();
-            Si.dispose();
+            St.dispose();
         }
-        if (e.getSource() == this.Si.BtnVenta) {
-            //Venta
+        if (e.getSource() == this.St.BtnVenta) {
+            //Venta -- No revisado
+            Controlador_Venta cv = new Controlador_Venta(Vn, CV, MV, St);
+            cv.iniciar();
             // Falta
-            
-            Si.dispose();
+            this.Vn.setVisible(true);
+            St.dispose();
         }
     }
 

@@ -91,7 +91,7 @@ public class ControladorProductos implements ActionListener{
             M_Pro.setTxtPrecioP(Pl_Precio);
             M_Pro.setTxtProveedorP(Pl_Proveedor);
 
-            C_Pro.registrar(M_Pro);
+            C_Pro.actualizar(M_Pro);
             JOptionPane.showMessageDialog(null, "Registro Actualizado");
             limpiar();
         }
@@ -118,8 +118,8 @@ public class ControladorProductos implements ActionListener{
             String Pl_Proveedor = this.V_Pro.TxtProveedorP.getText();
             
             M_Pro.setTxtCodigoP(Pl_Codigo);
-            if (C_Pro.buscar(M_Pro)) {
-                
+            //C_Pro.buscar(M_Pro);
+            if (C_Pro.buscar(M_Pro)) {                
 
                 this.V_Pro.TxtCodigoP.setText(String.valueOf(M_Pro.getTxtCodigoP()));
                 this.V_Pro.TxtDescripcionP.setText(String.valueOf(M_Pro.getTxtDescripcionP()));

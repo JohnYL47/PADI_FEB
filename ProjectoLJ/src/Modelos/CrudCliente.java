@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,22 +18,21 @@ import java.sql.SQLException;
  */
 public class CrudCliente {
 
-    private Connection con;
+    private Connection conect;
     private Conexion coon = new Conexion();
     
 
     public boolean registrar(Modelos_Clientes M_Cli) {
         PreparedStatement ps = null;
-        con  = coon.getConexion();
+        conect  = coon.getConexion();
         String sql = "Insert into clientes"
-                + "(ID, Nombre, Telefono, Direccion, `Razon social`)Values(?,?,?,?,?)";
+                + "(ID, Nombre, Telefono, Direccion)Values(?,?,?,?)";
         try {
-            ps = con.prepareStatement(sql);
+            ps = conect.prepareStatement(sql);
             ps.setInt(1, M_Cli.getTxtID());
             ps.setString(2, M_Cli.getTxtNombre());
             ps.setInt(3, M_Cli.getTxtTelefono());
             ps.setString(4, M_Cli.getTxtDireccion());
-            ps.setString(5, M_Cli.getTxtRazon());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -39,7 +40,7 @@ public class CrudCliente {
             return false;
         } finally {
             try {
-                con.close();
+                conect.close();
             } catch (SQLException e) {
                 System.err.println(e);
             }
@@ -50,7 +51,7 @@ public class CrudCliente {
         PreparedStatement ps = null;
         Connection con = coon.getConexion();
 
-        String sql = "update clientes set Nombre =?, Telefono=?, Direccion=?, `Razon social`=? "
+        String sql = "update clientes set Nombre =?, Telefono=?, Direccion=? "
                 + "where ID=?";
         try {
             ps = con.prepareStatement(sql);
@@ -58,7 +59,6 @@ public class CrudCliente {
             ps.setString(2, M_Cli.getTxtNombre());
             ps.setInt(3, M_Cli.getTxtTelefono());
             ps.setString(4, M_Cli.getTxtDireccion());
-            ps.setString(5, M_Cli.getTxtRazon());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -113,7 +113,6 @@ public class CrudCliente {
                 M_Cli.setTxtNombre(rs.getString("Nombre"));
                 M_Cli.setTxtTelefono(Integer.parseInt(rs.getString("Telefono")));
                 M_Cli.setTxtDireccion(rs.getString("Direccion"));
-                M_Cli.setTxtRazon(rs.getString("`Razon social`"));
                 return true;
             }
             return false;
@@ -125,10 +124,30 @@ public class CrudCliente {
                 con.close();
             } catch (SQLException e) {
                 System.err.println(e);
-
             }
-
         }
     }
-
+    public List ListarCliente(){
+       List<Modelos_Clientes> ListaCl = new ArrayList();
+       String sql = "SELECT * FROM clientes";
+       Connection con;
+       PreparedStatement ps = null;
+       ResultSet rs = null;
+       try {
+           con = coon.getConexion();
+           ps = con.prepareStatement(sql);
+           rs = ps.executeQuery();
+           while (rs.next()) {               
+               Modelos_Clientes cl = new Modelos_Clientes();
+               cl.setTxtID(rs.getInt("id"));
+               cl.setTxtNombre(rs.getString("nombre"));
+               cl.setTxtTelefono(rs.getInt("telefono"));
+               cl.setTxtDireccion(rs.getString("direccion"));
+               ListaCl.add(cl);
+           }
+       } catch (SQLException e) {
+           System.out.println(e.toString());
+       }
+       return ListaCl;
+   }
 }

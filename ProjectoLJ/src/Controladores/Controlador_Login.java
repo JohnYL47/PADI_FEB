@@ -50,12 +50,12 @@ public class Controlador_Login implements ActionListener {
                 ml.setTxtContraseña(TxtContraseña);
                 cl.ingreso(ml);
                 limpiar();
-            }
-
-            Sistema st = new Sistema();
-            Controlador_Sistema cs = new Controlador_Sistema(st);
-            cs.iniciar();
-            this.vl.dispose();
+                
+                Sistema St = new Sistema();
+                Controlador_Sistema cs = new Controlador_Sistema(St);
+                cs.iniciar();
+                this.vl.dispose();
+            }            
         }
         
         if (e.getSource() == this.vl.BtnRegistrar) {
@@ -79,7 +79,7 @@ public class Controlador_Login implements ActionListener {
         }
         if (e.getSource() == this.rg.BtnRgVolver) {
             this.vl.setVisible(true);
-            rg.dispose();
+            this.rg.dispose();
         }
     }
 
