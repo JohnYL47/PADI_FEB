@@ -11,14 +11,14 @@ package Modelos;
 public class Modelo_Productos {
     
     public int TxtCodigoP;
-    public String TxtDescripcionP;
+    public String TxtNombreP;
     public int TxtCantidadP;
     public double TxtPrecioP;
-    public String TxtProveedorP;
+    public int TxtProveedorP;
 
-    public Modelo_Productos(int TxtCodigoP, String TxtDescripcionP, int TxtCantidadP, double TxtPrecioP, String TxtProveedorP) {
+    public Modelo_Productos(int TxtCodigoP, String TxtNombreP, int TxtCantidadP, double TxtPrecioP, int TxtProveedorP) {
         this.TxtCodigoP = TxtCodigoP;
-        this.TxtDescripcionP = TxtDescripcionP;
+        this.TxtNombreP = TxtNombreP;
         this.TxtCantidadP = TxtCantidadP;
         this.TxtPrecioP = TxtPrecioP;
         this.TxtProveedorP = TxtProveedorP;
@@ -34,12 +34,12 @@ public class Modelo_Productos {
         this.TxtCodigoP = TxtCodigoP;
     }
 
-    public String getTxtDescripcionP() {
-        return TxtDescripcionP;
+    public String getTxtNombreP() {
+        return TxtNombreP;
     }
 
-    public void setTxtDescripcionP(String TxtDescripcionP) {
-        this.TxtDescripcionP = TxtDescripcionP;
+    public void setTxtNombreP(String TxtNombreP) {
+        this.TxtNombreP = TxtNombreP;
     }
 
     public int getTxtCantidadP() {
@@ -58,11 +58,11 @@ public class Modelo_Productos {
         this.TxtPrecioP = TxtPrecioP;
     }
 
-    public String getTxtProveedorP() {
+    public int getTxtProveedorP() {
         return TxtProveedorP;
     }
 
-    public void setTxtProveedorP(String TxtProveedorP) {
+    public void setTxtProveedorP(int TxtProveedorP) {
         this.TxtProveedorP = TxtProveedorP;
     }
 }

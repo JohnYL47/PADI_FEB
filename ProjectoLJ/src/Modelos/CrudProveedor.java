@@ -124,18 +124,17 @@ public class CrudProveedor {
 
     public List ListarProveedor(){
         List<Modelo_Proveedor> Listapr = new ArrayList();
-        ResultSet rs = null;
-        String sql = "SELECT * FROM proveedores";
+        String sql = "SELECT * FROM proveedores";        
         try {
             Connection con = cn.getConexion();
             ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {                
                 Modelo_Proveedor pr = new Modelo_Proveedor();
-                pr.setTxtRUT(rs.getInt("id"));
-                pr.setTxtNombrePr(rs.getString("nombre"));
-                pr.setTxtTelefonoPr(Integer.parseInt( rs.getString("telefono") ));
-                pr.setTxtDireccionPr(rs.getString("direccion"));
+                pr.setTxtRUT(rs.getInt("ID"));
+                pr.setTxtNombrePr(rs.getString("Nombre"));
+                pr.setTxtTelefonoPr(Integer.parseInt( rs.getString("Telefono") ));
+                pr.setTxtDireccionPr(rs.getString("Direccion"));
                 Listapr.add(pr);
             }
             

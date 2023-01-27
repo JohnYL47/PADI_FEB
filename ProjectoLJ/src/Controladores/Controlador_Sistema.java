@@ -79,18 +79,18 @@ public class Controlador_Sistema implements ActionListener {
             cc.iniciar();
             St.dispose();
         }
-        if (e.getSource() == this.St.BtnProducto) {
-            //Producto -- "Incompleto"
-            ControladorProductos cpd = new ControladorProductos(Pd, CPd, MpD, St);
-            cpd.iniciar();
-            St.dispose();
-        }
         if (e.getSource() == this.St.BtnProveedor) {
             //Proveedor -- No revisado
             ControladorProveedor cpv = new ControladorProveedor(Pv, CPv, MpV, St);
             cpv.iniciar();
             St.dispose();
         }
+        if (e.getSource() == this.St.BtnProducto) {
+            //Producto -- "Incompleto"
+            ControladorProductos cpd = new ControladorProductos(Pd, CPd, MpD, St);
+            cpd.iniciar();
+            St.dispose();
+        }        
         if (e.getSource() == this.St.BtnVenta) {
             //Venta -- No revisado
             Controlador_Venta cv = new Controlador_Venta(Vn, CV, MV, St);
@@ -100,5 +100,4 @@ public class Controlador_Sistema implements ActionListener {
             St.dispose();
         }
     }
-
 }

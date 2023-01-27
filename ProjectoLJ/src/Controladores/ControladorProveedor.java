@@ -54,6 +54,7 @@ public class ControladorProveedor implements ActionListener {
         this.V_Prov.setTitle("Proveedor");
         this.V_Prov.setLocationRelativeTo(null);
         this.V_Prov.setVisible(true);
+        ListarProveedor();
     }
 
     public void limpiar() {
@@ -150,6 +151,7 @@ public class ControladorProveedor implements ActionListener {
             Si.setVisible(true);
             V_Prov.dispose();
             limpiar();
+            LimpiarTable();
         }
     }
 

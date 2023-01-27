@@ -58,6 +58,7 @@ public class ControlladorCliente implements ActionListener {
         this.Cl.setTitle("Clientes");
         this.Cl.setLocationRelativeTo(null);
         this.Cl.setVisible(true);
+        listarCliente();
     }
 
     @Override
@@ -137,6 +138,7 @@ public class ControlladorCliente implements ActionListener {
         if (e.getSource() == this.Cl.BtnVolverC) {
             vm.setVisible(true);
             Cl.dispose();
+            LimpiarTable();
         }
     }
 

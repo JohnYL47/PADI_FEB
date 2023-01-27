@@ -37,10 +37,8 @@ public class Conexion {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(URL, USER, CLAVE);
             JOptionPane.showMessageDialog(null, "Conexion exitosa", "EXITO", JOptionPane.CLOSED_OPTION);
-        } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-        } catch (ClassNotFoundException x) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, x);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Error");
         }
         return con;
