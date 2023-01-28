@@ -47,10 +47,10 @@ public class CrudProveedor {
         }
     }
 
-    public boolean Actualizar(Modelo_Proveedor pr){
+    public boolean Actualizar(Modelo_Proveedor pr) {
         Connection con = cn.getConexion();
-        String sql = "UPDATE proveedores SET nombre=?, telefono=?, direccion=? WHERE id=?";
-        try {            
+        String sql = "UPDATE proveedores SET Nombre=?, Telefono=?, Direccion=? WHERE ID=?";
+        try {
             ps = con.prepareStatement(sql);
             ps.setString(1, pr.getTxtNombrePr());
             ps.setInt(2, pr.getTxtTelefonoPr());
@@ -61,7 +61,7 @@ public class CrudProveedor {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
-        }finally{
+        } finally {
             try {
                 con.close();
             } catch (SQLException e) {
@@ -70,9 +70,9 @@ public class CrudProveedor {
         }
     }
 
-    public boolean EliminarProveedor(int id){
+    public boolean EliminarProveedor(int id) {
         Connection con = cn.getConexion();
-        String sql = "DELETE FROM proveedores WHERE id = ? ";
+        String sql = "DELETE FROM proveedores WHERE ID = ? ";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -81,7 +81,7 @@ public class CrudProveedor {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
-        }finally{
+        } finally {
             try {
                 con.close();
             } catch (SQLException e) {
@@ -122,25 +122,28 @@ public class CrudProveedor {
         }
     }
 
-    public List ListarProveedor(){
-        List<Modelo_Proveedor> Listapr = new ArrayList();
-        String sql = "SELECT * FROM proveedores";        
+    public List ListarProveedor() {
+        List<Modelo_Proveedor> Lista = new ArrayList();
+        Connection con;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM proveedores";
         try {
-            Connection con = cn.getConexion();
+            con = cn.getConexion();
             ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {                
+            rs = ps.executeQuery();
+            while (rs.next()) {
                 Modelo_Proveedor pr = new Modelo_Proveedor();
                 pr.setTxtRUT(rs.getInt("ID"));
                 pr.setTxtNombrePr(rs.getString("Nombre"));
-                pr.setTxtTelefonoPr(Integer.parseInt( rs.getString("Telefono") ));
+                pr.setTxtTelefonoPr(Integer.parseInt(rs.getString("Telefono")));
                 pr.setTxtDireccionPr(rs.getString("Direccion"));
-                Listapr.add(pr);
+                Lista.add(pr);
             }
-            
+
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
-        return Listapr;
+        return Lista;
     }
 }

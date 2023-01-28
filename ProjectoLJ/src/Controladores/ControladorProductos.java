@@ -243,7 +243,7 @@ public class ControladorProductos implements ActionListener {
         }
     }
 
-    private void llenarProveedor() {
+    public void llenarProveedor() {
         List<Modelo_Proveedor> lista = C_prov.ListarProveedor();
 
         for (int i = 0; i < lista.size(); i++) {

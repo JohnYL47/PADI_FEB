@@ -1,4 +1,4 @@
- /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -25,7 +25,7 @@ public class Controlador_Sistema implements ActionListener {
     private Modelo_Venta MV = new Modelo_Venta();
     private Modelo_Productos MpD = new Modelo_Productos();
     private Modelo_Proveedor MpV = new Modelo_Proveedor();
-    private Modelos_Clientes McL = new Modelos_Clientes() ;
+    private Modelos_Clientes McL = new Modelos_Clientes();
     //--------Jframe------------//
     private Clientes Cl = new Clientes();
     private NuevaVenta Nv = new NuevaVenta();
@@ -33,8 +33,6 @@ public class Controlador_Sistema implements ActionListener {
     private Proveedor Pv = new Proveedor();
     private Ventas Vn = new Ventas();
     private Sistema St = new Sistema();
-
-    
 
     /*public Controlador_Sistema(Sistema st, CrudCliente CCl, CrudProductos CPd, CrudProveedor CPv, Modelos_Clientes McL, Modelo_Productos MpD, Modelo_Proveedor MpV, Modelo_NuevaVenta MnV) {
         this.CCl = CCl;
@@ -45,7 +43,6 @@ public class Controlador_Sistema implements ActionListener {
         this.MpD = MpD;
         this.MpV = MpV;
     }*/
-
     Controlador_Sistema(Sistema St) {
         this.St = St;
         this.St.BtnCliente.addActionListener(this);
@@ -64,40 +61,41 @@ public class Controlador_Sistema implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         
-
-        /* Navegar a otros Jframe en el Panel de Inicio */
-        
-        if (e.getSource() ==  this.St.BtnNuevaVenta) {
+        if (e.getSource() == this.St.BtnNuevaVenta) {
             //New Venta -- Incompleto
             Controlador_VentaNew CVnew = new Controlador_VentaNew(Nv, CV, MV, St);
             CVnew.Iniciar();
             St.dispose();
         }
         if (e.getSource() == this.St.BtnCliente) {
-            // Terminado.
+            /*** Terminado.
+             */
             ControlladorCliente cc = new ControlladorCliente(Cl, CCl, McL, St);
             cc.iniciar();
             St.dispose();
         }
         if (e.getSource() == this.St.BtnProveedor) {
-            //Proveedor -- No revisado
+            /*** Terminado.
+             */
             ControladorProveedor cpv = new ControladorProveedor(Pv, CPv, MpV, St);
             cpv.iniciar();
             St.dispose();
         }
         if (e.getSource() == this.St.BtnProducto) {
             //Producto -- "Incompleto"
+            /***
+             * java.sql.SQLDataException: Cannot determine value type from string 'Johan'.
+             * Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException: Cannot invoke "Modelos.CrudProveedor.ListarProveedor()" because "this.C_prov" is null
+             */
             ControladorProductos cpd = new ControladorProductos(Pd, CPd, MpD, St);
             cpd.iniciar();
             St.dispose();
-        }        
+        }
         if (e.getSource() == this.St.BtnVenta) {
-            //Venta -- No revisado
+            //Venta -- "Incompleto"
             Controlador_Venta cv = new Controlador_Venta(Vn, CV, MV, St);
             cv.iniciar();
-            // Falta
-            this.Vn.setVisible(true);
-            St.dispose();
+            // Falta: 'Mostrar total'
         }
     }
 }
