@@ -5,6 +5,7 @@
         <group>
             <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Controladores/ControlladorCliente.java</file>
             <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Modelos/CrudProveedor.java</file>
+            <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Modelos/Modelo_Proveedor.java</file>
             <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Controladores/Controlador_Venta.java</file>
             <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Modelos/Modelos_Clientes.java</file>
             <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Modelos/Modelo_Venta.java</file>
@@ -13,9 +14,12 @@
             <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Controladores/ControladorProductos.java</file>
             <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Modelos/CrudProductos.java</file>
             <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Vista/NuevaVenta.java</file>
+            <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Vista/Proveedor.java</file>
+            <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Controladores/ControladorProveedor.java</file>
             <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Controladores/Controlador_Sistema.java</file>
             <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Vista/Ventas.java</file>
             <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Modelos/Modelo_Productos.java</file>
+            <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Modelos/CrudVenta.java</file>
             <file>file:/C:/Users/JAMES/.workspace_git/GIT_Codex/PADI_FEB/ProjectoLJ/src/Vista/Productos.java</file>
         </group>
     </open-files>

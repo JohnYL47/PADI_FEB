@@ -9,6 +9,8 @@ import Modelos.*;
 import Controladores.Controlador_Sistema;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,6 +24,8 @@ public class Controlador_VentaNew implements ActionListener{
     private Modelo_Venta MV;
     private Sistema St;
     
+    private DefaultTableModel modelo = new DefaultTableModel();
+    
     public Controlador_VentaNew() {
     
     }
@@ -33,7 +37,7 @@ public class Controlador_VentaNew implements ActionListener{
         this.St = St;
         this.Nv.BtnVolverNV.addActionListener(this);
         this.Nv.jBttnClear.addActionListener(this);
-        this.Nv.jButton8.addActionListener(this);
+        this.Nv.btnGuardar.addActionListener(this);
         //Buttons
     }
 
@@ -41,6 +45,7 @@ public class Controlador_VentaNew implements ActionListener{
         this.Nv.setTitle("New Vents");
         this.Nv.setVisible(true);
         this.Nv.setLocationRelativeTo(null);
+        ListarNewvent();        
     }
 
     @Override
@@ -48,6 +53,28 @@ public class Controlador_VentaNew implements ActionListener{
         if (e.getSource() == this.Nv.BtnVolverNV) {
             this.St.setVisible(true);
             this.Nv.dispose();
+            LimpiarTable();
+        }
+    }
+    public void ListarNewvent() {
+        List<Modelo_Venta> ListarVn = CV.Listarventas();
+        modelo = (DefaultTableModel) this.Nv.jTbnewVenta.getModel();
+        Object[] ob = new Object[5];
+        for (int i = 0; i < ListarVn.size(); i++) {
+            ob[0] = ListarVn.get(i).getTxtCodigo();
+            ob[1] = ListarVn.get(i).getTxtDescripcion();
+            ob[2] = ListarVn.get(i).getTxtCantidad();
+            ob[3] = ListarVn.get(i).getTxtPrecio();
+            ob[4] = ListarVn.get(i).getTxttotal();
+            modelo.addRow(ob);
+        }
+        this.Nv.jTbnewVenta.setModel(modelo);
+
+    }
+    public void LimpiarTable() {
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i = i - 1;
         }
     }
     

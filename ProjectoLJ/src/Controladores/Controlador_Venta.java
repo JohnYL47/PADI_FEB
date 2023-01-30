@@ -56,6 +56,7 @@ public class Controlador_Venta implements ActionListener{
         if (e.getSource() == this.Vn.BtnVolverV) {
             this.St.setVisible(true);
             this.Vn.dispose();
+            LimpiarTable();
         }
         /***
          * Tomar Los precios de todos los [ Precios de productos ] y guardarlos en una variable.
@@ -89,5 +90,11 @@ public class Controlador_Venta implements ActionListener{
             modelo.addRow(ob);
         }
         this.Cl.jTableclient.setModel(modelo);
+    }
+    public void LimpiarTable() {
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i = i - 1;
+        }
     }
 }
